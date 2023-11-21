@@ -1,13 +1,13 @@
-const gulp = require('gulp');
-const sass = require('gulp-sass')(require('sass'));
-const autoprefixer = require('gulp-autoprefixer');
-const sourcemaps = require('gulp-sourcemaps');
-const concat = require('gulp-concat');
-const csso = require('gulp-csso');
-const babel = require('gulp-babel');
-const rename = require('gulp-rename');
-const uglify = require('gulp-uglify');
-const { series, parallel, watch } = require('gulp');
+import autoprefixer from 'gulp-autoprefixer';
+import babel from 'gulp-babel';
+import csso from 'gulp-csso';
+import dartSass from 'sass';
+import gulp from 'gulp';
+import gulpSass from 'gulp-sass';
+import rename from 'gulp-rename';
+import sourcemaps from 'gulp-sourcemaps';
+import uglify from 'gulp-uglify';
+const sass = gulpSass(dartSass);
 
 function css(cb) {
   gulp
@@ -47,5 +47,5 @@ function watchFiles() {
   gulp.watch('styles/**/*.scss', css);
   gulp.watch('scripts/**/*.js', js);
 }
-exports.default = parallel(css, js);
-exports.watch = parallel(watchFiles);
+export default gulp.parallel(css, js);
+export const watch = gulp.parallel(watchFiles);
